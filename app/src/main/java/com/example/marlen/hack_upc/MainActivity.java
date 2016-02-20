@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,21 +23,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     Spinner spinCategories; //li hem de fotre un hint que digui services o algo
-    Button btProx,btCity,btSearch,btOk;
+    Button btSearch,btOk;
     LinearLayout layout;
+    RadioButton btProx,btCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btProx = (Button)findViewById(R.id.bt_prox);
-        btCity = (Button)findViewById(R.id.bt_city);
+
         btSearch = (Button)findViewById(R.id.bt_search);
         btOk = (Button)findViewById(R.id.bt_ok);
 
-        btProx.setOnClickListener(this);
-        btCity.setOnClickListener(this);
+      //  btProx.setOnClickListener(this);
+       // btCity.setOnClickListener(this);
         btSearch.setOnClickListener(this);
         btOk.setOnClickListener(this);
 
@@ -136,16 +137,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()){
-            case R.id.bt_prox:
+            /*case R.id.bt_prox:
                 btSearch.setVisibility(View.VISIBLE);
                 break;
             case R.id.bt_city:
                 layout.setVisibility(View.VISIBLE);
-                break;
+                break;*/
             case R.id.bt_search:
                 intent = new Intent(getApplicationContext(),List.class);
                 startActivity(intent);
-                btSearch.setVisibility(View.GONE); //BOOOOOOOOOOOM
+                btSearch.setVisibility(View.GONE);
                 break;
             case R.id.bt_ok:
                 layout.setVisibility(View.GONE);
@@ -154,4 +155,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    public void onRadioButtonClicked(View v){
+        btProx = (RadioButton)findViewById(R.id.bt_prox);
+        btCity = (RadioButton)findViewById(R.id.bt_city);
+       // Toast.makeText(MainActivity.this, "CLICKEDDDDDD", Toast.LENGTH_SHORT).show();
+        boolean checked = ((RadioButton) v).isChecked();
+        switch (v.getId()){
+            case R.id.bt_prox:
+                if(checked){
+                    btSearch.setVisibility(View.VISIBLE);
+                    layout.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.bt_city:
+                if(checked)layout.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+
 }

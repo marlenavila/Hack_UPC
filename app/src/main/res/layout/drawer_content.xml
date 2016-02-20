@@ -46,27 +46,27 @@
             android:text="Select a search method:"
             android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/bt_prox"
-            android:layout_width="150dp"
+        <RadioGroup
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="#a85c16"
-            android:elevation="50dp"
-            android:text="Proximity"
-            android:textSize="20dp" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/bt_city"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="#a85c16"
-            android:elevation="50dp"
-            android:text="CITY"
-            android:textSize="20dp" />
+            <RadioButton
+                android:id="@+id/bt_prox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="Proximity"
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/bt_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="City"
+                android:textSize="20dp" />
+        </RadioGroup>
 
         <LinearLayout
             android:id="@+id/cityLayout"
@@ -74,7 +74,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/txt_postCode"
@@ -101,15 +101,6 @@
                      android:layout_marginTop="2dp"
                      android:background="#a85c16"></View> -->
 
-                <Button
-                    android:id="@+id/bt_ok"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="#a85c16"
-                    android:elevation="50dp"
-                    android:text="OK"
-                    android:textSize="20dp" />
             </LinearLayout>
 
         </LinearLayout>
