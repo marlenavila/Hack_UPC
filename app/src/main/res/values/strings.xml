@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Hack_UPC</string>
+
+    <string-array name="categories_array">
+        <item>Pene</item>
+        <item>Boobies</item>
+        <item>Jeje</item>
+        <item>DontKnowWhatToWriteHere</item>
+        <item>Holis</item>
+        <item>Turkey</item>
+        <item>Poland</item>
+        <item>India</item>
+    </string-array>
+</resources>
