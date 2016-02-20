@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     Spinner spinCategories; //li hem de fotre un hint que digui services o algo
-    Button btProx,btCity,btSearch;
+    Button btProx,btCity,btSearch,btOk;
     LinearLayout layout;
 
     @Override
@@ -33,10 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btProx = (Button)findViewById(R.id.bt_prox);
         btCity = (Button)findViewById(R.id.bt_city);
         btSearch = (Button)findViewById(R.id.bt_search);
+        btOk = (Button)findViewById(R.id.bt_ok);
 
         btProx.setOnClickListener(this);
         btCity.setOnClickListener(this);
         btSearch.setOnClickListener(this);
+        btOk.setOnClickListener(this);
 
         layout = (LinearLayout) findViewById(R.id.cityLayout);
 
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-     /*   // Initializing Drawer Layout and ActionBarToggle
+        // Initializing Drawer Layout and ActionBarToggle
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
 
             @Override
@@ -127,21 +129,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         //calling sync state is necessary or else your hamburger icon wont show up
-        actionBarDrawerToggle.syncState();*/
+        actionBarDrawerToggle.syncState();
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()){
             case R.id.bt_prox:
-
+                btSearch.setVisibility(View.VISIBLE);
                 break;
             case R.id.bt_city:
                 layout.setVisibility(View.VISIBLE);
                 break;
             case R.id.bt_search:
-                Intent intent = new Intent(getApplicationContext(),List.class);
+                intent = new Intent(getApplicationContext(),List.class);
                 startActivity(intent);
+                btSearch.setVisibility(View.GONE); //BOOOOOOOOOOOM
+                break;
+            case R.id.bt_ok:
+                layout.setVisibility(View.GONE);
+                btSearch.setVisibility(View.VISIBLE);
                 break;
         }
 

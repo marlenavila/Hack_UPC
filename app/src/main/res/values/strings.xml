@@ -11,4 +11,7 @@
         <item>Poland</item>
         <item>India</item>
     </string-array>
+    <string name="openDrawer">Open Drawer</string>
+    <string name="closeDrawer">Close Drawer</string>
+
 </resources>

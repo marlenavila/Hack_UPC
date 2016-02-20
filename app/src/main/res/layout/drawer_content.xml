@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/navview"
     android:orientation="vertical">
-    tools:context="com.android_examples.com.edittextunderlinecolorchange.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,24 +92,17 @@
                     android:id="@+id/editPostalCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_weight="0.8"
-                    android:background="@null"
-                    android:textCursorDrawable="@drawable/cursor_color">
-                    <requestFocus />
-                </EditText>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@+id/editPostalCode"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="2dp"
-                    android:background="#a85c16"></View>
+                    android:layout_weight="0.8" />
+                <!-- <View
+                     android:layout_width="match_parent"
+                     android:layout_height="2dp"
+                     android:layout_below="@+id/editPostalCode"
+                     android:layout_centerHorizontal="true"
+                     android:layout_marginTop="2dp"
+                     android:background="#a85c16"></View> -->
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/bt_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -132,5 +124,6 @@
         android:background="#a85c16"
         android:elevation="50dp"
         android:text="SEARCH"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:visibility="gone" />
 </LinearLayout>
