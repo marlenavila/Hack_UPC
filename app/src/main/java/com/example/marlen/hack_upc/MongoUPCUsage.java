@@ -24,7 +24,7 @@ public class MongoUPCUsage {
                         jsonobject = (JSONObject) response.get(i);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        System.out.println("FUCK YOU!");
+                        //System.out.println("FUCK YOU!");
                     }
                     Service serv=new Service();
                     serv.setName (jsonobject.optString("Name"));
