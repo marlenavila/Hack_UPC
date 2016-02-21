@@ -1,5 +1,7 @@
 package com.example.marlen.hack_upc;
 
+import android.util.Log;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -13,7 +15,7 @@ import java.util.ArrayList;
  * Created by Jou on 20/2/2016.
  */
 public class MongoUPCUsage {
-    public void getServicio(String type,double lon, double lat, final ArrayList<Service> s) throws JSONException {
+    public static void getServicio(String type,double lon, double lat, final ArrayList<Service> s) throws JSONException {
         RequestParams params = new RequestParams();
         params.put("q","{\"Type\" : \"" + type + "\", \"Coordenadas\" :" +
                 " {$near:{$geometry:{type:\"Point\", coordinates:[" + lon + ", " + lat + "]}}}}");
@@ -22,14 +24,14 @@ public class MongoUPCUsage {
 
             @Override
             public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
+                //super.onSuccess(statusCode, headers, response);
+                Log.v("JSONPORN", response.toString());
                 for (int i = 0; i < response.length(); i++) {
-                    JSONObject jsonobject = null;
+                    JSONObject jsonobject = new JSONObject();
                     try {
-                        jsonobject = (JSONObject) response.get(i);
+                        jsonobject = response.getJSONObject(i);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        //System.out.println("FUCK YOU!");
                     }
                     Service serv = new Service();
                     serv.setName(jsonobject.optString("Name"));

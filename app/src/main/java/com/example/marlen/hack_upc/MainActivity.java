@@ -1,6 +1,7 @@
 package com.example.marlen.hack_upc;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +19,9 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout layout;
     RadioButton btProx,btCity;
     EditText cityName;
+    DbHelper myDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .getStringArray(R.array.categories_array)); //agafo l'array declarada al string.xml
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinCategories.setAdapter(adapter);
+
+        myDbHelper = new DbHelper(this);
+        try {
+            myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+        try {
+            myDbHelper.openDataBase();
+        }catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
 
         spinCategories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -94,13 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.home:
                         Toast.makeText(MainActivity.this, "Home Selected", Toast.LENGTH_SHORT).show();
                         break;
-
-                    case R.id.register:
-                        Toast.makeText(MainActivity.this, "Register Selected", Toast.LENGTH_SHORT).show();
-                        intent = new Intent(getApplicationContext(),Register.class);
-                        startActivity(intent);
-                        break;
-
                     case R.id.about:
                         Toast.makeText(MainActivity.this, "About Selected", Toast.LENGTH_SHORT).show();
                         break;
@@ -137,13 +147,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()){
             case R.id.bt_search:
-                String s = cityName.getText().toString();
-                if(s.equals(""))
+                if(spinCategories.getSelectedItem().toString().equals("Services"))
+                    Toast.makeText(this, "Select a service", Toast.LENGTH_SHORT).show();
+                else if(cityName.getText().toString().equals(""))
                     Toast.makeText(this, "Enter a city name", Toast.LENGTH_SHORT).show();
                 else{
-                    intent = new Intent(getApplicationContext(),List.class);
-                    startActivity(intent);
-                    btSearch.setVisibility(View.GONE);
+                    String type = spinCategories.getSelectedItem().toString();
+                    Cursor c = myDbHelper.getCity(cityName.getText().toString());
+                    if(c.moveToFirst()){
+                        Double lat,lon;
+                        lat = c.getDouble(c.getColumnIndex("latitud"));
+                        lon = c.getDouble(c.getColumnIndex("longitud"));
+                        Bundle b = new Bundle();
+                        b.putString("type",type);
+                        b.putDouble("lat",40);
+                        b.putDouble("lon",40);
+                        intent = new Intent(getApplicationContext(),List.class);
+                        intent.putExtras(b);
+                        startActivity(intent);
+                        finish();
+                        btSearch.setVisibility(View.GONE);
+                    }
+                    else
+                        Toast.makeText(this, "City no exists", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
         }

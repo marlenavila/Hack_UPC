@@ -4,6 +4,8 @@ package com.example.marlen.hack_upc;
  * Created by Jou on 20/2/2016.
  */
 
+import android.util.Log;
+
 import com.loopj.android.http.*;
 
 public class MongoUPC {
@@ -14,6 +16,7 @@ public class MongoUPC {
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         params.put("apiKey", API_KEY);
+        Log.v("JSONTOK", getAbsoluteUrl(url) + params.toString());
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
@@ -23,6 +26,6 @@ public class MongoUPC {
     }
 
     private static String getAbsoluteUrl(String relativeUrl) {
-        return BASE_URL;
+        return BASE_URL + relativeUrl;
     }
 }

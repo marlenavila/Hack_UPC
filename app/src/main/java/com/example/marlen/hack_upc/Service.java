@@ -25,7 +25,7 @@ public class Service {
     public int getMaxDist() {
         return MaxDist;
     }
-    public int getTelNum() {
+    public Integer getTelNum() {
         return TelNum;
     }
 

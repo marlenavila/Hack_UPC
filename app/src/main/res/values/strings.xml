@@ -2,14 +2,13 @@
     <string name="app_name">Hack_UPC</string>
 
     <string-array name="categories_array">
-        <item>Pene</item>
-        <item>Boobies</item>
-        <item>Jeje</item>
-        <item>DontKnowWhatToWriteHere</item>
-        <item>Holis</item>
-        <item>Turkey</item>
-        <item>Poland</item>
-        <item>India</item>
+        <item>Services</item>
+        <item>Fontaneria</item>
+        <item>Carpinteria</item>
+        <item>Canguro</item>
+        <item>Informatica</item>
+        <item>Profesor de repaso</item>
+        <item>Limpieza</item>
     </string-array>
     <string name="openDrawer">Open Drawer</string>
     <string name="closeDrawer">Close Drawer</string>
