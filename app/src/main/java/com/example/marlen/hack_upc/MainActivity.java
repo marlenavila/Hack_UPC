@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -23,9 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     Spinner spinCategories; //li hem de fotre un hint que digui services o algo
-    Button btSearch,btOk;
+    Button btSearch;
     LinearLayout layout;
     RadioButton btProx,btCity;
+    EditText cityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         btSearch = (Button)findViewById(R.id.bt_search);
-        btOk = (Button)findViewById(R.id.bt_ok);
-
-      //  btProx.setOnClickListener(this);
-       // btCity.setOnClickListener(this);
         btSearch.setOnClickListener(this);
-        btOk.setOnClickListener(this);
+
+        cityName = (EditText)findViewById(R.id.editCityName);
 
         layout = (LinearLayout) findViewById(R.id.cityLayout);
 
@@ -137,29 +136,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()){
-            /*case R.id.bt_prox:
-                btSearch.setVisibility(View.VISIBLE);
-                break;
-            case R.id.bt_city:
-                layout.setVisibility(View.VISIBLE);
-                break;*/
             case R.id.bt_search:
-                intent = new Intent(getApplicationContext(),List.class);
-                startActivity(intent);
-                btSearch.setVisibility(View.GONE);
-                break;
-            case R.id.bt_ok:
-                layout.setVisibility(View.GONE);
-                btSearch.setVisibility(View.VISIBLE);
+                String s = cityName.getText().toString();
+                if(s.equals(""))
+                    Toast.makeText(this, "Enter a city name", Toast.LENGTH_SHORT).show();
+                else{
+                    intent = new Intent(getApplicationContext(),List.class);
+                    startActivity(intent);
+                    btSearch.setVisibility(View.GONE);
+                }
                 break;
         }
-
     }
 
     public void onRadioButtonClicked(View v){
         btProx = (RadioButton)findViewById(R.id.bt_prox);
         btCity = (RadioButton)findViewById(R.id.bt_city);
-       // Toast.makeText(MainActivity.this, "CLICKEDDDDDD", Toast.LENGTH_SHORT).show();
         boolean checked = ((RadioButton) v).isChecked();
         switch (v.getId()){
             case R.id.bt_prox:
@@ -169,7 +161,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.bt_city:
-                if(checked)layout.setVisibility(View.VISIBLE);
+                if(checked){
+                    layout.setVisibility(View.VISIBLE);
+                    btSearch.setVisibility(View.VISIBLE);
+                }
                 break;
         }
     }
