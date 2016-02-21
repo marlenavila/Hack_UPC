@@ -18,7 +18,7 @@ public class MongoUPCUsage {
         params.put("q","{\"Type\" : \"" + type + "\", \"Coordenadas\" :" +
                 " {$near:{$geometry:{type:\"Point\", coordinates:[" + lon + ", " + lat + "]}}}}");
         params.put("c","0");
-        MongoUPC.get("", params, new JsonHttpResponseHandler() {
+        MongoUPC.get("Services", params, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONArray response) {
